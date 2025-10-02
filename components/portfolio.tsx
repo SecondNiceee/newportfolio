@@ -81,17 +81,17 @@ export function Portfolio() {
                 className={`absolute -inset-0.5 bg-gradient-to-r ${project.gradient} rounded-2xl opacity-75 blur-xl ${project.glowColor}`}
               />
 
-              <Card className="relative bg-gradient-to-br from-gray-900/90 to-black/90 border-2 border-gray-800 backdrop-blur-xl overflow-hidden h-full">
+              <Card className="relative bg-gradient-to-br pt-0 from-gray-900/90 to-black/90 border-2 border-gray-800 backdrop-blur-xl overflow-hidden h-full">
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} />
 
-                <div className="aspect-video overflow-hidden relative">
+                <div className="aspect-video overflow-hidden min-h-[250px] relative">
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-50 mix-blend-overlay`}
+                    className={`absolute min-h-[250px] inset-0 bg-gradient-to-br ${project.gradient} opacity-50 mix-blend-overlay`}
                   />
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full min-h-[250px] object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
@@ -107,16 +107,16 @@ export function Portfolio() {
                   </div>
                 </div>
 
-                <CardContent className="p-6 relative">
+                <CardContent className="p-6 relative h-full flex flex-col">
                   <h3
-                    className={`text-2xl font-bold mb-3 bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent drop-shadow-lg`}
+                    className={`text-2xl  font-bold mb-3 bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent drop-shadow-lg`}
                   >
                     {project.title}
                   </h3>
                   <p className="text-gray-200 text-base leading-relaxed mb-6">{project.description}</p>
 
                   <Button
-                    className={`w-full bg-gradient-to-r ${project.gradient} hover:shadow-2xl ${project.glowColor} transition-all duration-300 font-bold text-white border-0`}
+                    className={`w-full mt-auto bg-gradient-to-r ${project.gradient} hover:shadow-2xl ${project.glowColor} transition-all duration-300 font-bold text-white border-0`}
                     asChild
                   >
                     <a href={project.url} target="_blank" rel="noopener noreferrer">

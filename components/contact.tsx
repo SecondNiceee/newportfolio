@@ -36,7 +36,7 @@ export function Contact() {
         <div
           className={`max-w-md mx-auto transition-all duration-700 delay-200 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
         >
-          <Card className="bg-gradient-to-br from-primary/10 via-background/50 to-primary/5 border-primary/30 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 group relative overflow-hidden">
+          <Card className="cursor-pointer bg-gradient-to-br from-primary/10 via-background/50 to-primary/5 border-primary/30 backdrop-blur-sm hover:scale-105 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/20 group relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-1000 animate-pulse" />
 
             <CardContent className="p-8 text-center relative">
@@ -51,7 +51,7 @@ export function Contact() {
               </p>
 
               <Button
-                className="w-full group-hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90 relative overflow-hidden cursor-pointer"
+                className="w-full py-3 group-hover:scale-105 transition-all duration-300 bg-primary hover:bg-primary/90 relative overflow-hidden cursor-pointer"
                 size="lg"
                 asChild
               >

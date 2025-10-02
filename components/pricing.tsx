@@ -81,7 +81,7 @@ export function Pricing() {
             </div>
 
             <Button
-              className="w-full bg-white text-black hover:bg-white/90 font-semibold hover:scale-[1.02] transition-transform py-6"
+              className="w-full bg-white text-black hover:bg-white/90 font-semibold hover:scale-[1.02] transition-transform py-3"
               size="lg"
             >
               Начать проект
