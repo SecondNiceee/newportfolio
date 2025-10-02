@@ -6,6 +6,8 @@ export const WebGLBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
   useEffect(() => {
+    // Early return if no canvas or not in browser
+    if (typeof window === "undefined") return
     const canvas = canvasRef.current
     if (!canvas) return
 
@@ -136,6 +138,9 @@ export const WebGLBackground = () => {
     const resolutionLocation = gl.getUniformLocation(program, "resolution")
     const timeLocation = gl.getUniformLocation(program, "time")
 
+    // Show the WebGL canvas after successful initialization
+    canvas.style.opacity = "1"
+
     // Animation loop
     const startTime = Date.now()
     const animate = () => {
@@ -158,5 +163,25 @@ export const WebGLBackground = () => {
     }
   }, [])
 
-  return <canvas ref={canvasRef} className="fixed inset-0 w-full h-full -z-10" style={{ pointerEvents: "none" }} />
+  return (
+    <div className="fixed inset-0 w-full h-full -z-10">
+      {/* CSS gradient fallback that shows immediately */}
+      <div 
+        className="absolute inset-0 w-full h-full"
+        style={{
+          background: `
+            radial-gradient(ellipse at center, rgba(3, 8, 25, 0.9) 0%, rgba(0, 0, 0, 1) 70%),
+            linear-gradient(45deg, rgba(0, 0, 0, 1) 0%, rgba(2, 5, 15, 1) 25%, rgba(3, 8, 25, 1) 50%, rgba(1, 3, 12, 1) 75%, rgba(0, 0, 0, 1) 100%)
+          `,
+          animation: 'gradientShift 8s ease-in-out infinite alternate'
+        }}
+      />
+      {/* WebGL canvas overlay */}
+      <canvas 
+        ref={canvasRef} 
+        className="absolute inset-0 w-full h-full opacity-0 transition-opacity duration-1000" 
+        style={{ pointerEvents: "none" }}
+      />
+    </div>
+  )
 }

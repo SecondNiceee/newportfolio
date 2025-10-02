@@ -16,32 +16,24 @@ export const GL = ({ hovering }: { hovering: boolean }) => {
     // Check if we're in browser environment
     if (typeof window === "undefined") return
 
-    // Test WebGL support
+    // Simplified WebGL detection for faster loading
     try {
       const canvas = document.createElement("canvas")
-      const gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl")
+      const gl = canvas.getContext("webgl", { antialias: false, alpha: false }) || 
+                 canvas.getContext("experimental-webgl", { antialias: false, alpha: false })
 
       if (!gl) {
         setError("WebGL not supported")
         return
       }
 
-      // Test if WebGL context is working
-      const testShader = gl.createShader(gl.VERTEX_SHADER)
-      if (!testShader) {
-        setError("WebGL shader creation failed")
-        return
-      }
-
-      gl.deleteShader(testShader)
       setHasWebGL(true)
+      setIsMounted(true)
     } catch (err) {
       console.error("[v0] WebGL detection error:", err)
       setError("WebGL initialization failed")
       return
     }
-
-    setIsMounted(true)
   }, [])
 
   if (!isMounted || !hasWebGL || error) {
@@ -56,11 +48,11 @@ export const GL = ({ hovering }: { hovering: boolean }) => {
     speed: 1.0,
     focus: 3.8,
     aperture: 1.79,
-    size: 512,
+    size: 512, // Restored original particle count
     noiseScale: 0.6,
     noiseIntensity: 0.52,
     timeScale: 1,
-    pointSize: 10.0,
+    pointSize: 10.0, // Restored original point size
     opacity: 0.8,
     planeScale: 10.0,
     vignetteDarkness: 1.5,
@@ -80,24 +72,20 @@ export const GL = ({ hovering }: { hovering: boolean }) => {
             near: 0.01,
             far: 300,
           }}
+          gl={{ 
+            antialias: false, 
+            alpha: false, 
+            powerPreference: "high-performance",
+            stencil: false,
+            depth: false
+          }}
+          dpr={Math.min(window.devicePixelRatio, 2)}
+          performance={{ min: 0.5 }}
           onCreated={(state) => {
-            // Validate all required state properties
-            if (!state || !state.gl || !state.scene || !state.camera) {
-              console.error("[v0] WebGL context not properly initialized")
+            // Basic validation only
+            if (!state?.gl) {
               setError("WebGL context initialization failed")
               return
-            }
-
-            // Test WebGL context functionality
-            try {
-              const gl = state.gl.getContext()
-              if (!gl || gl.isContextLost()) {
-                setError("WebGL context lost")
-                return
-              }
-            } catch (err) {
-              console.error("[v0] WebGL context test failed:", err)
-              setError("WebGL context test failed")
             }
           }}
           onError={(error) => {

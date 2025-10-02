@@ -52,7 +52,7 @@ export function Portfolio() {
         <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-cyan-600/20 rounded-full blur-3xl animate-pulse delay-500" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 relative">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div
           className={`text-center mb-12 sm:mb-16 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
         >
@@ -70,11 +70,11 @@ export function Portfolio() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-6 sm:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className={`relative group transition-all duration-700 cursor-pointer hover:scale-105 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
+              className={`relative group transition-all duration-700 cursor-pointer hover:scale-[1.02] sm:hover:scale-105 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-12"}`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
               <div
@@ -84,22 +84,22 @@ export function Portfolio() {
               <Card className="relative bg-gradient-to-br pt-0 from-gray-900/90 to-black/90 border-2 border-gray-800 backdrop-blur-xl overflow-hidden h-full">
                 <div className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-20`} />
 
-                <div className="aspect-video overflow-hidden min-h-[250px] relative">
+                <div className="aspect-video overflow-hidden min-h-[200px] sm:min-h-[220px] lg:min-h-[250px] relative">
                   <div
-                    className={`absolute min-h-[250px] inset-0 bg-gradient-to-br ${project.gradient} opacity-50 mix-blend-overlay`}
+                    className={`absolute inset-0 bg-gradient-to-br ${project.gradient} opacity-50 mix-blend-overlay`}
                   />
                   <img
                     src={project.image || "/placeholder.svg"}
                     alt={project.title}
-                    className="w-full h-full min-h-[250px] object-cover"
+                    className="w-full h-full object-cover"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent" />
 
-                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
+                  <div className="absolute bottom-3 left-3 right-3 sm:bottom-4 sm:left-4 sm:right-4 flex flex-wrap gap-1 sm:gap-2">
                     {project.tags.map((tag, tagIndex) => (
                       <span
                         key={tagIndex}
-                        className={`px-3 py-1.5 bg-gradient-to-r ${project.gradient} rounded-full text-xs text-white font-mono font-bold shadow-lg backdrop-blur-sm`}
+                        className={`px-2 py-1 sm:px-3 sm:py-1.5 bg-gradient-to-r ${project.gradient} rounded-full text-xs text-white font-mono font-bold shadow-lg backdrop-blur-sm`}
                       >
                         {tag}
                       </span>
@@ -107,21 +107,21 @@ export function Portfolio() {
                   </div>
                 </div>
 
-                <CardContent className="p-6 relative h-full flex flex-col">
+                <CardContent className="p-4 sm:p-6 relative h-full flex flex-col">
                   <h3
-                    className={`text-2xl  font-bold mb-3 bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent drop-shadow-lg`}
+                    className={`text-xl sm:text-2xl font-bold mb-2 sm:mb-3 bg-gradient-to-r ${project.gradient} bg-clip-text text-transparent drop-shadow-lg`}
                   >
                     {project.title}
                   </h3>
-                  <p className="text-gray-200 text-base leading-relaxed mb-6">{project.description}</p>
+                  <p className="text-gray-200 text-sm sm:text-base leading-relaxed mb-4 sm:mb-6">{project.description}</p>
 
                   <Button
-                    className={`w-full mt-auto bg-gradient-to-r ${project.gradient} hover:shadow-2xl ${project.glowColor} transition-all duration-300 font-bold text-white border-0`}
+                    className={`w-full mt-auto bg-gradient-to-r ${project.gradient} hover:shadow-2xl ${project.glowColor} transition-all duration-300 font-bold text-white border-0 text-sm sm:text-base py-2 sm:py-3`}
                     asChild
                   >
                     <a href={project.url} target="_blank" rel="noopener noreferrer">
                       Посмотреть сайт
-                      <ExternalLink className="ml-2 h-4 w-4" />
+                      <ExternalLink className="ml-2 h-3 w-3 sm:h-4 sm:w-4" />
                     </a>
                   </Button>
                 </CardContent>
